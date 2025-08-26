@@ -56,33 +56,46 @@ const wishes = [
 ];
 
 
+// Velvet-inspired gradients
+const velvetGradients = [
+  "#800020", "#4B0082", // Burgundy → Indigo
+  "#2E0854", "#7E354D", // Dark Purple → Velvet Red
+  "#013220", "#191970", // Dark Green → Midnight Blue
+  "#3B0A45", "#6A0DAD", // Plum → Amethyst
+  "#0D3B66", "#800020", // Deep Blue → Burgundy
+];
+
 export default function BirthdayPage() {
   const [activeIndex, setActiveIndex] = useState(0);
+  const [bgIndex, setBgIndex] = useState(0);
 
   // Auto change card every 4 seconds
   useEffect(() => {
     const interval = setInterval(() => {
-      setActiveIndex((prev) => (prev + 1) % wishes.length);
+      setActiveIndex((prev) => {
+        const nextIndex = (prev + 1) % wishes.length;
+        setBgIndex((prevBg) => (prevBg + 1) % velvetGradients.length);
+        return nextIndex;
+      });
     }, 4000);
     return () => clearInterval(interval);
   }, []);
 
-  // Floating hearts / balloons
   const floatingItems = Array.from({ length: 15 });
 
   return (
-    <div className="relative w-full h-screen overflow-hidden bg-gradient-to-br from-purple-900 via-pink-800 to-indigo-900 flex flex-col items-center justify-center">
-      {/* Animated Background Gradient */}
+    <div className="relative w-full h-screen overflow-hidden flex flex-col items-center justify-center">
+      {/* Animated Background that changes with card */}
       <motion.div
+        key={bgIndex}
         className="absolute inset-0"
-        animate={{
-          background: [
-            "linear-gradient(to bottom right, #7e22ce, #db2777, #4338ca)",
-            "linear-gradient(to bottom right, #db2777, #4338ca, #7e22ce)",
-            "linear-gradient(to bottom right, #4338ca, #7e22ce, #db2777)",
-          ],
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        exit={{ opacity: 0 }}
+        transition={{ duration: 1.2 }}
+        style={{
+          background: velvetGradients[bgIndex],
         }}
-        transition={{ duration: 15, repeat: Infinity, ease: "linear" }}
       />
 
       {/* Floating hearts & balloons */}
@@ -150,15 +163,14 @@ export default function BirthdayPage() {
         </motion.div>
       ))}
 
-
       {/* Focused card in center */}
       <AnimatePresence>
         <motion.div
           key={activeIndex}
-          className="absolute text-white bg-gradient-to-r from-pink-500 via-red-400 to-purple-600 px-8 py-6 rounded-2xl text-2xl font-bold shadow-2xl border-4 border-white/20"
+          className={`absolute text-white bg-[#000000]  px-8 py-6 rounded-2xl text-2xl font-bold shadow-2xl border-4 border-white/20`}
           initial={{ scale: 0, opacity: 0, rotate: -30 }}
           animate={{
-            scale: [0, 1.2, 1],   // bounce
+            scale: [0, 1.2, 1],
             opacity: 1,
             rotate: 0,
             boxShadow: [
@@ -170,18 +182,17 @@ export default function BirthdayPage() {
           exit={{ scale: 0, opacity: 0, rotate: 30 }}
           transition={{
             duration: 1,
-            type: "tween",   // ✅ changed from spring → tween
-            ease: "easeInOut"
+            type: "tween",
+            ease: "easeInOut",
           }}
         >
           {wishes[activeIndex]}
         </motion.div>
       </AnimatePresence>
 
-
       {/* Animated Footer */}
       <motion.footer
-        className="absolute bottom-6 text-lg font-semibold flex items-center gap-2"
+        className="absolute bottom-6 text-lg font-semibold flex items-center gap-2 text-white"
         animate={{ scale: [1, 1.3, 1], color: ["#fff", "#ff4d6d", "#fff"] }}
         transition={{ duration: 1.5, repeat: Infinity }}
       >
