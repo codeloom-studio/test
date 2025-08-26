@@ -71,7 +71,7 @@ export default function BirthdayPage() {
     <div className="relative w-full h-screen overflow-hidden bg-gradient-to-br from-purple-900 via-pink-800 to-indigo-900 flex flex-col items-center justify-center">
       {/* Header */}
       <motion.h1
-        className="absolute top-10 text-5xl font-bold text-white drop-shadow-lg"
+        className="absolute top-20 text-xl font-bold text-white drop-shadow-lg"
         animate={{ scale: [1, 1.1, 1], color: ["#fff", "#ffe4e1", "#fff"] }}
         transition={{ duration: 2, repeat: Infinity }}
       >
