@@ -67,12 +67,59 @@ export default function BirthdayPage() {
     return () => clearInterval(interval);
   }, []);
 
+  // Floating hearts / balloons
+  const floatingItems = Array.from({ length: 15 });
+
   return (
     <div className="relative w-full h-screen overflow-hidden bg-gradient-to-br from-purple-900 via-pink-800 to-indigo-900 flex flex-col items-center justify-center">
+      {/* Animated Background Gradient */}
+      <motion.div
+        className="absolute inset-0"
+        animate={{
+          background: [
+            "linear-gradient(to bottom right, #7e22ce, #db2777, #4338ca)",
+            "linear-gradient(to bottom right, #db2777, #4338ca, #7e22ce)",
+            "linear-gradient(to bottom right, #4338ca, #7e22ce, #db2777)",
+          ],
+        }}
+        transition={{ duration: 15, repeat: Infinity, ease: "linear" }}
+      />
+
+      {/* Floating hearts & balloons */}
+      {floatingItems.map((_, i) => (
+        <motion.div
+          key={i}
+          className="absolute text-pink-300 text-2xl"
+          initial={{
+            x: Math.random() * window.innerWidth,
+            y: window.innerHeight + 50,
+            opacity: 0.6,
+          }}
+          animate={{
+            y: -100,
+            opacity: [0.6, 1, 0.6],
+          }}
+          transition={{
+            duration: 10 + Math.random() * 10,
+            repeat: Infinity,
+            delay: i * 0.5,
+          }}
+        >
+          {i % 2 === 0 ? "❤️" : "🎈"}
+        </motion.div>
+      ))}
+
       {/* Header */}
       <motion.h1
-        className="absolute top-20 text-xl font-bold text-white drop-shadow-lg"
-        animate={{ scale: [1, 1.1, 1], color: ["#fff", "#ffe4e1", "#fff"] }}
+        className="absolute top-16 text-xl font-extrabold text-white drop-shadow-2xl"
+        animate={{
+          scale: [1, 1.1, 1],
+          textShadow: [
+            "0px 0px 8px #fff",
+            "0px 0px 20px #ff4d6d",
+            "0px 0px 8px #fff",
+          ],
+        }}
         transition={{ duration: 2, repeat: Infinity }}
       >
         🎉 Happy Birthday Muskan 🎉
@@ -103,19 +150,34 @@ export default function BirthdayPage() {
         </motion.div>
       ))}
 
+
       {/* Focused card in center */}
       <AnimatePresence>
         <motion.div
           key={activeIndex}
-          className="absolute text-white bg-gradient-to-r from-pink-500 via-red-400 to-purple-600 px-8 py-6 rounded-2xl text-xl font-semibold shadow-2xl"
-          initial={{ scale: 0, opacity: 0, rotate: -20 }}
-          animate={{ scale: 1, opacity: 1, rotate: 0 }}
-          exit={{ scale: 0, opacity: 0, rotate: 20 }}
-          transition={{ duration: 0.8, type: "spring" }}
+          className="absolute text-white bg-gradient-to-r from-pink-500 via-red-400 to-purple-600 px-8 py-6 rounded-2xl text-2xl font-bold shadow-2xl border-4 border-white/20"
+          initial={{ scale: 0, opacity: 0, rotate: -30 }}
+          animate={{
+            scale: [0, 1.2, 1],   // bounce
+            opacity: 1,
+            rotate: 0,
+            boxShadow: [
+              "0 0 0px #fff",
+              "0 0 20px #ff4d6d",
+              "0 0 0px #fff",
+            ],
+          }}
+          exit={{ scale: 0, opacity: 0, rotate: 30 }}
+          transition={{
+            duration: 1,
+            type: "tween",   // ✅ changed from spring → tween
+            ease: "easeInOut"
+          }}
         >
           {wishes[activeIndex]}
         </motion.div>
       </AnimatePresence>
+
 
       {/* Animated Footer */}
       <motion.footer
