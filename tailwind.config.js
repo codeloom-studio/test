@@ -14,7 +14,11 @@ module.exports = {
         "greyBlack": "#FFFFFFB2",
         "shadowGrey": "#FAFAFA",
         "lightBlack": "#1D1D1F",
-        "semiLightBlack": "#3F3F46"
+        "semiBlack": "#131518",
+        "semiLightBlack": "#3F3F46",
+        "offWhite": "#F3F4F5",
+        "semiDarkBlack": "#6E7279",
+        "darkBlack": "#484C50"
 
       },
       fontFamily: {
