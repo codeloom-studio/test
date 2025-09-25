@@ -3,6 +3,7 @@ import tick from '../assets/tick.svg';
 import BlueButton from './buttons/BlueButton';
 import oldCard from '../assets/old_card.svg';
 import newCard from '../assets/new_card.svg';
+import { Link } from 'react-router-dom';
 
 const Benefit = () => {
     return (
@@ -144,7 +145,7 @@ const Benefit = () => {
                 </div>
             </div>
 
-            <BlueButton label='Get Yours Now' />
+            <Link to="/register"><BlueButton label='Get Yours Now' /></Link>
         </div>
     )
 }

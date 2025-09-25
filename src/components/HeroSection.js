@@ -1,8 +1,13 @@
 import heroImage from '../assets/hero.svg';
 import BlackButton from './buttons/BlackButton';
 import BlueButton from './buttons/BlueButton';
-import reviewers from '../assets/reviewers.svg'
+import reviewer1 from '../assets/reviewer1.svg'
+import reviewer2 from '../assets/reviewer2.svg'
+import reviewer3 from '../assets/reviewer3.svg'
+import reviewer4 from '../assets/reviewer4.svg'
+import reviewer5 from '../assets/reviewer5.svg'
 import { FaStar } from 'react-icons/fa';
+import { Link } from 'react-router-dom';
 
 const HeroSection = () => {
     return (
@@ -18,13 +23,19 @@ const HeroSection = () => {
                     AI-powered digital cards that capture leads, integrate with<br /> CRMs, and amplify your brand
                 </p>
                 <div className='flex gap-4 mt-12'>
-                    <BlueButton label='Get Yours Now' />
-                    <BlackButton label='Book a Demo' />
+                    <Link to="/register"><BlueButton label='Get Yours Now' /></Link>
+                    <Link to="/demo"><BlackButton label='Book a Demo' /></Link>
                 </div>
                 <div className='flex mt-14'>
-                    <div className='flex items-center justify-center py-4'>
-                        <img src={reviewers} className='h-9 w-auto' />
+                    <div className="flex items-center justify-center py-4">
+                        <img src={reviewer1} className="h-16 w-16 rounded-full object-cover border border-white -ml-5 first:ml-0" />
+                        <img src={reviewer2} className="h-16 w-16 rounded-full object-cover border border-white -ml-5" />
+                        <img src={reviewer3} className="h-16 w-16 rounded-full object-cover border border-white -ml-5" />
+                        <img src={reviewer4} className="h-16 w-16 rounded-full object-cover border border-white -ml-5" />
+                        <img src={reviewer5} className="h-16 w-16 rounded-full object-cover border border-white -ml-5" />
                     </div>
+
+
                     <div className='flex flex-col items-start justify-center ml-4'>
                         <div className='flex items-center gap-2 '>
                             <FaStar className="text-lightBlue text-lg" />
