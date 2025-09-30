@@ -2,8 +2,17 @@ import logo from '../assets/logo.svg'
 import envelop from '../assets/envelop.svg'
 import star from '../assets/star.svg'
 import question from '../assets/question.svg'
+import BlueTransparentButton from './buttons/BlueTransparentButton'
+import { useNavigate } from 'react-router-dom'
 
 const Asidebar = () => {
+    const navigate = useNavigate();
+
+    const handleLogout = () => {
+        console.log("Logging out...");
+        localStorage.removeItem("token");
+        navigate("/login");
+    };
     return (
         <div className='w-[20vw] py-10 shadow-md'>
             <img src={logo} alt="logo" className='h-7 w-54 m-4' />
@@ -31,6 +40,10 @@ const Asidebar = () => {
                     <p className='font-normal text-sm text-semiBlack'>HELP</p>
                 </div>
             </div>
+            <div className='my-6 mx-4'>
+                <BlueTransparentButton label="Logout" onClick={handleLogout} />
+            </div>
+
         </div>
     )
 }
