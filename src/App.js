@@ -13,9 +13,6 @@ import VerifyEmail from "./Pages/VerifyEmail";
 import ResetPassword from "./Pages/ResetPassword";
 import ForgotPassword from "./Pages/ForgotPassword";
 import AdminDashboard from "./Pages/AdminDashboard";
-import PreviewCard from "./components/PreviewCard";
-import PreviewCardOne from "./components/PreviewCardOne";
-import PreviewCardTwo from "./components/PreviewCardTwo";
 
 function Layout() {
   return (
@@ -42,7 +39,6 @@ function App() {
         </Route>
         <Route path="/login" element={<LoginPage />} />
         <Route path="/dashboard/:id" element={<Dashboard />} />
-        <Route path="/preview-card" element={<PreviewCardTwo />} />
         <Route path="/register" element={<RegisterPage />} />
         <Route path="/verify-email" element={<VerifyEmail />} />
         <Route path="/reset-password" element={<ResetPassword />} />

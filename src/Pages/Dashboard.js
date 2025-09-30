@@ -151,6 +151,7 @@ const Dashboard = () => {
                         showButtons={true}
                         selected={selected}
                         selectedColor={selectedColor}
+                        selectedProfileCardStyle={selectedId}
                     /> : <PreviewCardTwo
                         profileImage={profileImage || dummyProfile}
                         coverImage={coverImage}
@@ -172,6 +173,7 @@ const Dashboard = () => {
                         showButtons={true}
                         selected={selected}
                         selectedColor={selectedColor}
+                        selectedProfileCardStyle={selectedId}
                     />}
 
                 </div>
@@ -196,29 +198,6 @@ const Dashboard = () => {
 
                         <p className="text-sm text-semiBlack font-semibold">Card Layout</p>
 
-                        {/* <div className="w-fit h-fit flex items-center justify-center gap-12">
-                            <div className="flex flex-col items-center justify-center space-y-2">
-                                <div className="text-white w-32 h-32 bg-offWhite rounded-lg">
-                                    <ProfileCard />
-                                </div>
-                                <p className="text-xs text-black font-medium">Profile Picture</p>
-                            </div>
-
-                            <div className="flex flex-col items-center justify-center space-y-2">
-                                <div className="text-white w-32 h-32 bg-offWhite rounded-lg">
-                                    <ProfileCardCircle />
-                                </div>
-                                <p className="text-xs text-black font-medium">Small Profile Picture</p>
-                            </div>
-
-                            <div className="flex flex-col items-center justify-center space-y-2">
-                                <div className="text-white w-32 h-32 bg-offWhite rounded-lg">
-                                    <ProfileCardWithCover />
-                                </div>
-                                <p className="text-xs text-black font-medium">Cover + Profile Picture</p>
-                            </div>
-                        </div> */}
-
                         <div className="w-fit h-fit flex items-center justify-center gap-12">
                             {profileCardStyles.length > 0 && profileCardStyles.map((card) => (
                                 <div
@@ -228,14 +207,14 @@ const Dashboard = () => {
                                 >
                                     <div
                                         className={`w-32 h-32 bg-offWhite rounded-lg flex items-center justify-center transition duration-300 ${selectedId === card.id
-                                            ? "border-[1px] border-gray-300 shadow-lg rounded-xl"
+                                            ? "border-[1px] border-gray-300 shadow-lg rounded-xl bg-blue-50"
                                             : ""
                                             }`}
                                     >
                                         {card.component}
                                     </div>
                                     <p
-                                        className={`text-xs font-medium transition ${selectedId === card.id ? "text-black" : "text-gray-400"
+                                        className={`text-xs font-medium transition ${selectedId === card.id ? "text-blue-600 font-semibold" : "text-gray-400"
                                             }`}
                                     >
                                         {card.name}

@@ -24,8 +24,82 @@ const PreviewCardOne = ({
         buttonColor: "#058ef1",
         cardText: "#000000",
         buttonText: "#ffffff",
-    }
+    },
+    selectedProfileCardStyle = 1
 }) => {
+
+    // Function to render profile image based on selected style
+    const renderProfileImage = () => {
+        switch (selectedProfileCardStyle) {
+            case 1: // Profile Card - full width image with gradient fade
+                return (
+                    <div
+                        className="w-full h-32 flex items-center justify-center relative mb-3"
+                        style={{
+                            backgroundColor: (!coverImage && !profileImage) ? selectedColor?.cardBg : "transparent",
+                        }}
+                    >
+                        {/* If cover image exists, use it as background, otherwise use profile image as full width */}
+                        <img
+                            src={coverImage || profileImage}
+                            alt={coverImage ? "cover" : "profile"}
+                            className="w-full h-full object-cover rounded-t-xl"
+                        />
+                        {/* Gradient overlay for better text visibility */}
+                        <div className="absolute bottom-0 left-0 right-0 h-12 bg-gradient-to-t from-black/50 to-transparent rounded-t-xl"></div>
+                    </div>
+                );
+
+            case 2: // Profile Card Circle - circular profile image, no cover
+                return (
+                    <div className="w-full h-32 flex items-center justify-center mb-3">
+                        <img
+                            src={profileImage}
+                            alt="profile"
+                            className="w-20 h-20 rounded-full border-4 border-white shadow-md"
+                        />
+                    </div>
+                );
+
+            case 3: // Profile Card with Cover - cover background with circular profile overlay
+                return (
+                    <div
+                        className="w-full h-32 flex items-center justify-center relative mb-3"
+                        style={{
+                            backgroundColor: coverImage ? "transparent" : selectedColor?.cardBg,
+                        }}
+                    >
+                        {coverImage && (
+                            <img src={coverImage} alt="cover" className="w-full h-full object-cover rounded-t-xl" />
+                        )}
+                        <img
+                            src={profileImage}
+                            alt="profile"
+                            className="w-20 h-20 rounded-full border-4 border-white shadow-md absolute"
+                        />
+                    </div>
+                );
+
+            default:
+                return (
+                    <div
+                        className="w-full h-32 flex items-center justify-center relative mb-3"
+                        style={{
+                            backgroundColor: !coverImage ? selectedColor?.cardBg : "transparent",
+                        }}
+                    >
+                        {coverImage && (
+                            <img src={coverImage} alt="cover" className="w-full h-full object-cover rounded-t-xl" />
+                        )}
+                        <img
+                            src={profileImage}
+                            alt="profile"
+                            className="w-20 h-20 rounded-full border-4 border-white shadow-md absolute"
+                        />
+                    </div>
+                );
+        }
+    };
 
     return (
         <div
@@ -39,23 +113,8 @@ const PreviewCardOne = ({
                 color: selectedColor?.cardText || "#000",
             }}
         >
-            {/* Cover Image / Color */}
-            <div
-                className="w-full h-32 flex items-center justify-center relative mb-3"
-                style={{
-                    backgroundColor: !coverImage ? selectedColor?.cardBg : "transparent",
-                }}
-            >
-                {coverImage && (
-                    <img src={coverImage} alt="cover" className="w-full h-full object-cover rounded-t-xl" />
-                )}
-
-                <img
-                    src={profileImage}
-                    alt="profile"
-                    className="w-20 h-20 rounded-full border-4 border-white shadow-md absolute"
-                />
-            </div>
+            {/* Profile Image Section - Dynamic based on selected style */}
+            {renderProfileImage()}
 
             {/* Card Content */}
             <div className="flex flex-col justify-center flex-1 p-4">
