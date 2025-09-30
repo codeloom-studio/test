@@ -10,9 +10,18 @@ import PreviewCardOne from "../components/PreviewCardOne"
 import PreviewCardTwo from "../components/PreviewCardTwo"
 import { useParams } from "react-router-dom";
 import Navbar from "../components/Navbar"
+import ProfileCard from "../components/ProfileCard"
+import ProfileCardCircle from "../components/ProfileCardCircle"
+import ProfileCardWithCover from "../components/ProfileCardWithCover"
 
 
 const Dashboard = () => {
+
+    const profileCardStyles = [
+        { id: 1, name: "Profile Card", component: <ProfileCard /> },
+        { id: 2, name: "Profile Card Circle", component: <ProfileCardCircle /> },
+        { id: 3, name: "Profile Card with Cover", component: <ProfileCardWithCover /> },
+    ]
     const { id } = useParams();
 
     const [formData, setFormData] = useState({
@@ -40,6 +49,7 @@ const Dashboard = () => {
         cardText: "#ffffff",
         buttonText: "#000000",
     });
+    const [selectedId, setSelectedId] = useState(profileCardStyles[0].id);
 
     const handleImageUpload = (e, type) => {
         const file = e.target.files[0];
@@ -79,12 +89,12 @@ const Dashboard = () => {
     ];
 
     const fonts = [
-        { name: "Inter", className: "font-[Inter]" },
-        { name: "Roboto", className: "font-[Roboto]" },
-        { name: "Montserrat", className: "font-[Montserrat]" },
-        { name: "Merriweather", className: "font-[Merriweather]" },
-        { name: "Caveat", className: "font-[Caveat]" },
-        { name: "Gloria Hallelujah", className: "font-[Gloria_Hallelujah]" },
+        { name: "Inter", className: "font-[inter]" },
+        { name: "Roboto", className: "font-[roboto]" },
+        { name: "Montserrat", className: "font-[montserrat]" },
+        { name: "Merriweather", className: "font-[merriweather]" },
+        { name: "Caveat", className: "font-[caveat]" },
+        { name: "Gloria Hallelujah", className: "font-[gloriaHallelujah]" },
     ];
 
     const screenOptions = [
@@ -116,7 +126,6 @@ const Dashboard = () => {
 
     return (
         <>
-            <Navbar />
             <div className='w-[100vw] min-h-screen flex bg-[background: #FCFDFD4D;]'>
                 <Asidebar />
                 <div className="w-[50vw] h-screen flex items-center justify-center">
@@ -167,7 +176,7 @@ const Dashboard = () => {
 
                 </div>
 
-                <div className="w-[37vw] h-screen flex flex-col justify-start text-3xl rounded-lg font-inter text-semiLightBlack overflow-y-auto">
+                <div className="w-[40vw] h-screen flex flex-col justify-start text-3xl rounded-lg font-inter text-semiLightBlack overflow-y-auto shadow-lg mt-10">
                     <div className="m-4 h-fit flex space-x-4">
                         <WhiteButton icon={edit} text="Create" />
                         <WhiteButton icon={swap} text="QR Code" />
@@ -187,28 +196,52 @@ const Dashboard = () => {
 
                         <p className="text-sm text-semiBlack font-semibold">Card Layout</p>
 
-                        <div className="w-fit h-fit flex items-center justify-center gap-12">
+                        {/* <div className="w-fit h-fit flex items-center justify-center gap-12">
                             <div className="flex flex-col items-center justify-center space-y-2">
                                 <div className="text-white w-32 h-32 bg-offWhite rounded-lg">
-
+                                    <ProfileCard />
                                 </div>
                                 <p className="text-xs text-black font-medium">Profile Picture</p>
                             </div>
 
                             <div className="flex flex-col items-center justify-center space-y-2">
                                 <div className="text-white w-32 h-32 bg-offWhite rounded-lg">
-
+                                    <ProfileCardCircle />
                                 </div>
                                 <p className="text-xs text-black font-medium">Small Profile Picture</p>
                             </div>
 
                             <div className="flex flex-col items-center justify-center space-y-2">
                                 <div className="text-white w-32 h-32 bg-offWhite rounded-lg">
-
+                                    <ProfileCardWithCover />
                                 </div>
                                 <p className="text-xs text-black font-medium">Cover + Profile Picture</p>
                             </div>
+                        </div> */}
 
+                        <div className="w-fit h-fit flex items-center justify-center gap-12">
+                            {profileCardStyles.length > 0 && profileCardStyles.map((card) => (
+                                <div
+                                    key={card.id}
+                                    onClick={() => setSelectedId(card.id)}
+                                    className="flex flex-col items-center justify-center space-y-2 cursor-pointer"
+                                >
+                                    <div
+                                        className={`w-32 h-32 bg-offWhite rounded-lg flex items-center justify-center transition duration-300 ${selectedId === card.id
+                                            ? "border-[1px] border-gray-300 shadow-lg rounded-xl"
+                                            : ""
+                                            }`}
+                                    >
+                                        {card.component}
+                                    </div>
+                                    <p
+                                        className={`text-xs font-medium transition ${selectedId === card.id ? "text-black" : "text-gray-400"
+                                            }`}
+                                    >
+                                        {card.name}
+                                    </p>
+                                </div>
+                            ))}
                         </div>
 
                         <div className="w-full flex h-fit mt-6">

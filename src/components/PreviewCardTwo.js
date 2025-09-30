@@ -10,6 +10,9 @@ import {
     MapPin,
     Globe,
 } from "lucide-react"; // using lucide-react icons
+import ProfileCard from './ProfileCard';
+import ProfileCardCircle from './ProfileCardCircle';
+import ProfileCardWithCover from './ProfileCardWithCover';
 
 const PreviewCardTwo = ({
     profileImage = dummyProfile,
@@ -47,7 +50,6 @@ const PreviewCardTwo = ({
                     ? `linear-gradient(to bottom, #ffffff, ${selectedColor.cardBg})` // gray gradient
                     : selectedColor.cardBg,
             }}>
-            {/* Profile Image */}
             <div
                 className="w-full h-32 flex items-center justify-center relative mb-3"
                 style={{

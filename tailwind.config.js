@@ -23,6 +23,11 @@ module.exports = {
       },
       fontFamily: {
         inter: ['Inter', 'sans-serif'],
+        roboto: ['Roboto', 'sans-serif'],
+        montserrat: ['Montserrat', 'sans-serif'],
+        merriweather: ['Merriweather', 'serif'],
+        caveat: ['Caveat', 'cursive'],
+        gloriaHallelujah: ['Gloria Hallelujah', 'cursive'],
       },
       boxShadow: {
         custom: "0px 10px 10px -3.75px #691F0821",
